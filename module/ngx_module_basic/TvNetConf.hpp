@@ -21,6 +21,6 @@ class TvNetConf final{
 	}
 };
 
-NGX_MOD_INSTANCE(TvNetModule,ngx_http_tvnet_module,TvNetConf)
+NGX_MOD_INSTANCE(TvNetModule,ngx_http_lres_module,TvNetConf)
 
 #endif
