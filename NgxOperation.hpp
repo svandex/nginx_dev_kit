@@ -9,7 +9,7 @@ class NgxOperation{
 	    _default_writer.Reset(_return_string);
 	}
 	NgxOperation(const NgxOperation&)=delete;
-    protected:
+
 	//增加键值对
 	void AddStringKeyValueToRet(const char*,const char*);
 
@@ -20,9 +20,9 @@ class NgxOperation{
 	void EndReturnValueConstruction(rapidjson::Document&& _return_document){
 	    _return_document.Accept(_default_writer);
 	}
-	//读取所有数据链块的数据到一段连续的内存中
-	void ReadAllDataToBuf(ngx_http_request_t*);
-    protected:
+
+	//将ngx_chain_t转换成ngx_str_t
+	ngx_str_t NgxChainToNgxStr(ngx_chain_t*,ngx_pool_t*);
 	rapidjson::Document _default_document;
 	rapidjson::StringBuffer _return_string;
 	rapidjson::Writer<rapidjson::StringBuffer> _default_writer;

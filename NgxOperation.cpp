@@ -10,15 +10,31 @@ void NgxOperation::AddExceptionMessageToRet(std::exception &e)
         AddStringKeyValueToRet("exception", e.what());
 }
 
+ngx_str_t NgxOperation::NgxChainToNgxStr(ngx_chain_t* c,ngx_pool_t* p){
+    ngx_str_t ccp=ngx_null_string;
+    NgxChain chain(c);
+    //NgxPool pool(p);
 
-void NgxOperation::ReadAllDataToBuf(ngx_http_request_t*r){
-    NgxChain c(r->request_body->bufs);
-    void* cbufs=NgxPool(r->pool).nalloc<void>(c.size());
-    size_t stored_pos=0;
-    for(NgxChainIterator it=c.begin();it!=c.end();it++){
+    //ccp.data=pool.nalloc<u_char>(chain.size());
+    ccp.data=(u_char*)ngx_pcalloc(p,chain.size());
+
+    size_t _pos=0;
+
+    for(NgxChainIterator it=chain.begin();it!=chain.end();it++){
 	ngx_str_t node=(*it).data().range();
-	//memcpy(cbufs+stored_pos,node.data,node.len);
-	stored_pos+=(*it).data().size();
+	if(node.len==0){
+	    break;
+	}
+	memcpy(ccp.data+_pos,node.data,node.len+1);
+	_pos+=(*it).data().size();
     }
 
+    if(_pos==chain.size()){
+	ccp.len=_pos;
+    }else{
+	ccp.data=nullptr;
+	ccp.len=0;
+    }
+    return ccp;
 }
+
