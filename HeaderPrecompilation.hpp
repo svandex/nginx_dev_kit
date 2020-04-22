@@ -1,5 +1,5 @@
-#ifndef __HEADERPRECOMPILATION_H__
-#define __HEADERPRECOMPILATION_H__
+#ifndef __HEADERPRECOMPILATION_HPP__
+#define __HEADERPRECOMPILATION_HPP__
 
 
 #include "rapidjson/stringbuffer.h"
@@ -9,6 +9,10 @@
 #include "rapidjson/error/en.h"
 #include "rapidjson/istreamwrapper.h"
 
+#include "sqlite3.h"
 #include "SQLiteCpp/SQLiteCpp.h"
+
+#include "NgxAll.hpp"
+#include "NgxOperation.hpp"
 
 #endif
