@@ -15,4 +15,7 @@
 #include "NgxAll.hpp"
 #include "NgxOperation.hpp"
 
+#include <sstream>
+#include <functional>
+
 #endif

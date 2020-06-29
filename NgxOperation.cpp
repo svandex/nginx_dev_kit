@@ -1,13 +1,9 @@
 #include "NgxOperation.hpp"
 
-void NgxOperation::AddStringKeyValueToRet(const char* key,const char * value){
-    rapidjson::Document::AllocatorType &_dallocator = _default_document.GetAllocator();
-    _default_document.AddMember(rapidjson::Value(key, _dallocator), rapidjson::Value(value, _dallocator), _dallocator);
-}
 
 void NgxOperation::AddExceptionMessageToRet(std::exception &e)
 {
-        AddStringKeyValueToRet("exception", e.what());
+        AddKeyValueToRet("exception", e.what());
 }
 
 ngx_str_t NgxOperation::NgxChainToNgxStr(ngx_chain_t* c,ngx_pool_t* p){
