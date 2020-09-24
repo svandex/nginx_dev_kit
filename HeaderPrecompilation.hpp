@@ -1,5 +1,5 @@
-#ifndef __HEADERPRECOMPILATION_HPP__
-#define __HEADERPRECOMPILATION_HPP__
+#ifndef HEADERPRECOMPILATION_HPP
+#define HEADERPRECOMPILATION_HPP
 
 
 #include "rapidjson/stringbuffer.h"
@@ -13,9 +13,16 @@
 #include "SQLiteCpp/SQLiteCpp.h"
 
 #include "NgxAll.hpp"
-#include "NgxOperation.hpp"
 
 #include <sstream>
 #include <functional>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include <chrono>
+#include <unordered_map>
+
+constexpr const char* SQLITE_MAIN_NAME="management";
+constexpr const char* SQLITE_SECURITY_QUIZ_NAME="securityQuiz";
 
 #endif

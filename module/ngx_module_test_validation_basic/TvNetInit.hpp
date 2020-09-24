@@ -1,5 +1,5 @@
-#ifndef _TVNETINIT_HPP_
-#define _TVNETINIT_HPP_
+#ifndef TVNETINIT_HPP
+#define TVNETINIT_HPP
 
 #include "TvNetConf.hpp"
 #include "TvNetHandler.hpp"
@@ -20,24 +20,6 @@ class TvNetInit final
 				&this_type::tv_handler,
 				NGX_HTTP_LOC_CONF_OFFSET,
 				offsetof(conf_type,database_root_dir),
-				nullptr
-			},
-			//邮件发送服务对应邮箱
-			{
-				ngx_string("host_email"),
-				NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1,
-				&this_type::tv_handler,
-				NGX_HTTP_LOC_CONF_OFFSET,
-				offsetof(conf_type,host_email),
-				nullptr
-			},
-			//邮件发送服务对应邮箱密码，每三个月公司强制更新一次
-			{
-				ngx_string("host_email_password"),
-				NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1,
-				&this_type::tv_handler,
-				NGX_HTTP_LOC_CONF_OFFSET,
-				offsetof(conf_type,host_email_password),
 				nullptr
 			},
 			//上传文件所在的根目录
@@ -80,17 +62,17 @@ class TvNetInit final
 	    return m;
 	}
 
-    private:
+	private:
 	static char* tv_handler(ngx_conf_t* cf, ngx_command_t* cmd,void* conf){
-	    auto rc=ngx_conf_set_str_slot(cf,cmd,conf);
-	    
-	    if(rc!=NGX_CONF_OK){
-		return rc;
-	    }
+		auto rc=ngx_conf_set_str_slot(cf,cmd,conf);
 
-	    NgxHttpCoreModule::handler(cf,&handler_type::handler_normal);
+		if(rc!=NGX_CONF_OK){
+			return rc;
+		}
 
-	    return NGX_CONF_OK;
+		NgxHttpCoreModule::handler(cf,&handler_type::handler_normal);
+
+		return NGX_CONF_OK;
 	}
 
 };

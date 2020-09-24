@@ -2,6 +2,12 @@
 #define __NGXOPERATION_HPP__
 #include "HeaderPrecompilation.hpp"
 
+/*
+ * 提供各种工具函数
+ * 
+ * 使用时尽可能不初始化对象
+ *
+ * */
 class NgxOperation{
 	public:
 		NgxOperation(){
